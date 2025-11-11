@@ -1,17 +1,17 @@
 <template>
-  <div class="center-box">
+  <div class="container">
     <h1>Llistat de Tasques</h1>
 
     <TaskForm @afegir="afegirNova"/>
 
-    <div class="checkbox-container">
+    <div class="checkboxContainer">
       <input type="checkbox" v-model="veurePendents" id="veurePendents" />
       <label for="veurePendents">Mostra només pendents</label>
     </div>
 
     <TaskList :tasques="tasquesVisibles" @toggle="alternarEstat" @borrar="borrarTasca"/>
 
-    <p class="stats">Total: {{ total }} | Pendents: {{ pendents }}</p>
+    <p class="comptador">Total: {{ total }} | Pendents: {{ pendents }}</p>
   </div>
 </template>
 
@@ -33,24 +33,24 @@ const llistaTasques = ref([
 const veurePendents = ref(false);
 
 const afegirNova = (text) => {
-  const id = llistaTasques.value.length ? llistaTasques.value.at(-1).id + 1: 1;
-  llistaTasques.value.push({ id, titol: text, feta: false });
+  const maxId = llistaTasques.value.length ? Math.max(...llistaTasques.value.map(tasques => tasques.id)) : 0;
+  llistaTasques.value.push({ id: maxId + 1, titol: text, feta: false });
 };
 
 const borrarTasca = (id) => {
-  llistaTasques.value = llistaTasques.value.filter(t => t.id !== id);
+  llistaTasques.value = llistaTasques.value.filter(tasques => tasques.id !== id);
 };
 
 const alternarEstat = (id) => {
-  const t = llistaTasques.value.find(t => t.id === id);
-  t.feta = !t.feta;
+  const tasques = llistaTasques.value.find(tasques => tasques.id === id);
+  tasques.feta = !tasques.feta;
 };
 
 const tasquesVisibles = computed(() =>
-  veurePendents.value ? llistaTasques.value.filter(t => !t.feta) : llistaTasques.value
+  veurePendents.value ? llistaTasques.value.filter(tasques => !tasques.feta) : llistaTasques.value
 );
 
 const total = computed(() => llistaTasques.value.length);
-const pendents = computed(() => llistaTasques.value.filter(t => !t.feta).length);
+const pendents = computed(() => llistaTasques.value.filter(tasques => !tasques.feta).length);
 
 </script>

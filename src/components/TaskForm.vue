@@ -1,5 +1,5 @@
 <template>
-  <div class="add-task">
+  <div class="afegirTasca">
     <input v-model="text" placeholder="Afegeix una tasca nova" type="text"/>
     <button @click="enviar">Afegir</button>
   </div>
@@ -14,7 +14,7 @@ const emit = defineEmits(["afegir"]);
 const text = ref("");
 
 const enviar = () => {
-  if (text.value.trim() === "") return;
+  if (!text.value.trim()) return; 
   emit("afegir", text.value);
   text.value = "";
 };
