@@ -3,7 +3,7 @@
     <span :style="{ textDecoration: tasca.feta ? 'line-through' : 'none' }">{{ tasca.titol }}</span>
 
     <div class="tascaBotons">
-      <button class="completar" @click="emit('toggle', tasca.id)">{{ tasca.feta ? "Desmarcar" : "Completar" }}</button>
+      <button class="completar" @click="emit('marcar', tasca.id)">{{ tasca.feta ? "Desmarcar" : "Completar" }}</button>
 
       <button class="esborrar" @click="emit('borrar', tasca.id)">
         <i class="fas fa-trash"></i>
@@ -18,6 +18,6 @@ defineProps({
   tasca: Object
 });
 
-const emit = defineEmits(["toggle", "borrar"]);
+const emit = defineEmits(["marcar", "borrar"]);
 
 </script>

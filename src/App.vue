@@ -9,7 +9,7 @@
       <label for="veurePendents">Mostra només pendents</label>
     </div>
 
-    <TaskList :tasques="tasquesVisibles" @toggle="alternarEstat" @borrar="borrarTasca"/>
+    <TaskList :tasques="tasquesVisibles" @marcar="alternarEstat" @borrar="borrarTasca"/>
 
     <p class="comptador">Total: {{ total }} | Pendents: {{ pendents }}</p>
   </div>

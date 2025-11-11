@@ -1,6 +1,6 @@
 <template>
   <ul style="list-style: none; padding: 0; width: 100%">
-    <TaskItem v-for="t in tasques" :key="t.id" :tasca="t" @toggle="emit('toggle', $event)" @borrar="emit('borrar', $event)"/>
+    <TaskItem v-for="tasca in tasques" :key="tasca.id" :tasca="tasca" @marcar="emit('marcar', $event)" @borrar="emit('borrar', $event)"/>
   </ul>
 </template>
 
@@ -12,6 +12,6 @@ defineProps({
   tasques: Array
 });
 
-const emit = defineEmits(["toggle", "borrar"]);
+const emit = defineEmits(["marcar", "borrar"]);
 
 </script>
